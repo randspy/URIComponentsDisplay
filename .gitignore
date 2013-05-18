@@ -1,0 +1,6 @@
+#qt creator configuration files
+*.user
+
+#temporary files
+*.swp
+
