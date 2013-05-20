@@ -1,6 +1,7 @@
 #include "TestTree.h"
 #include "URILinkParser/DataTypes/Tree.h"
 
+
 namespace UnitTest
 {
 
@@ -17,10 +18,29 @@ void TestTree::addValue()
     QCOMPARE(aTree.getValue(), std::string("value"));
 }
 
+void TestTree::getChilds()
+{
+    DataTypes::Tree<std::string> aTree;
+    DataTypes::Tree<std::string> aTreeChild;
+
+    aTreeChild.setValue("value");
+    aTree.addChild(aTreeChild);
+
+    QCOMPARE(aTree.numberOfChilds(), 1u);
+    QCOMPARE(aTree.getChild(0).getValue(), std::string("value"));
+
+}
+
+void TestTree::noValidChildAccessChilds()
+{
+     DataTypes::Tree<std::string> aTree;
+     QVERIFY_THROW(aTree.getChild(0), std::out_of_range);
+}
+
 void TestTree::traversal()
 {
     DataTypes::Tree<std::string> aTree;
-    DataTypes::Tree<std::string>* aTreeChild = new DataTypes::Tree<std::string>();
+    DataTypes::Tree<std::string> aTreeChild;
 
     aTree.addChild(aTreeChild);
 

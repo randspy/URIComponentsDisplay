@@ -58,6 +58,15 @@ void TestRFC2396URIStandardParser::urnSchema()
     QCOMPARE(comp.getAuthority().c_str(), "");
 }
 
+void TestRFC2396URIStandardParser::schema()
+{
+    URI::RFC2396URIStandardParser uriParser("http://www.ics.uci.edu/pub/ietf/uri/#Related");
+    URI::RFC2396URIStandardParser::Components comp = uriParser.getParsedComponents();
+    DataTypes::Component aSchema = comp->getChild(0).getValue();
+
+    QCOMPARE(aSchema.getValue(), std::string("http"));
+}
+
 }
 
 

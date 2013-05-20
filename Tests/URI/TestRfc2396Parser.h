@@ -20,6 +20,7 @@ private slots:
     void missingSchemaComponent();
     void schemaComponentIsCorupted();
     void urnSchema();
+    void schema();
 };
 
 

@@ -30,7 +30,8 @@ HEADERS += Tests/AutoTest.h \
     Tests/URI/TestMatchedSubStringRetreiver.h \
     URILinkParser/DataTypes/Component.h \
     URILinkParser/DataTypes/Tree.h \
-    Tests/DataTypes/TestTree.h
+    Tests/DataTypes/TestTree.h \
+    URILinkParser/URI/URIHandler.h
     URILinkParser/URI/URIParser.h
 
 INCLUDEPATH += ./usr/include/boost/

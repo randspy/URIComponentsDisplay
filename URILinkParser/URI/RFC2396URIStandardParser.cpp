@@ -33,6 +33,16 @@ URIComponents RFC2396URIStandardParser::parseURI()
 
     return component;
 }
+RFC2396URIStandardParser::Components RFC2396URIStandardParser::getParsedComponents()
+{
+    DataTypes::Tree<DataTypes::Component>* component = new DataTypes::Tree<DataTypes::Component>();
+
+    DataTypes::Tree<DataTypes::Component> schema;
+//    schema.setValue(extractComponent("^(([^:/?#]+):)", "[^:/?#]+"));
+
+    component->addChild(schema);
+    return Components(component);
+}
 
 std::string RFC2396URIStandardParser::extractComponent(const std::string& compIndetificationRegex, const std::string& compRegex)
 {

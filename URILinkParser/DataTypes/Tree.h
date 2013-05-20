@@ -2,6 +2,7 @@
 #define TREE_H
 
 #include <vector>
+#include <stdexcept>
 
 namespace DataTypes
 {
@@ -11,26 +12,27 @@ class Tree
 {
 public:
     Tree(){}
-    ~Tree()
-    {
-        for(typename std::vector<Tree*>::iterator it = _childs.begin(); it != _childs.end(); ++it)
-        {
-            delete *it;
-        }
-    }
+    ~Tree(){}
 
     T getValue() const { return _value; }
     void setValue(const T& value) { _value = value; }
 
-    void addChild(Tree* childTree) { _childs.push_back(childTree); }
+    void addChild(const Tree& childTree) { _childs.push_back(childTree); }
 
-private:
-    Tree(const Tree&);
-    Tree& operator=(const Tree&);
+    unsigned int numberOfChilds() const { return _childs.size(); }
+
+    const Tree& getChild(unsigned int index)
+    {
+        if(index < numberOfChilds())
+        {
+            return _childs[index];
+        }
+        throw std::out_of_range("Child with a given number does not exist");
+    }
 
 private:
     T _value;
-    std::vector<Tree*> _childs;
+    std::vector<Tree> _childs;
 };
 
 }
