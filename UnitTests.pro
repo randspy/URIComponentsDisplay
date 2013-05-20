@@ -20,7 +20,9 @@ SOURCES += main.cpp \
     URILinkParser/URI/RFC2396URIStandardParser.cpp \
     URILinkParser/URI/MatchedSubStringRetreiver.cpp \
     Tests/URI/TestMatchedSubStringRetreiver.cpp \
-    Tests/DataTypes/TestTree.cpp
+    Tests/DataTypes/TestTree.cpp \
+    URILinkParser/URI/RFC2396Schema.cpp \
+    Tests/URI/TestRFC2396Schema.cpp
 
 HEADERS += Tests/AutoTest.h \
     Tests/URI/TestRfc2396Parser.h \
@@ -31,7 +33,9 @@ HEADERS += Tests/AutoTest.h \
     URILinkParser/DataTypes/Component.h \
     URILinkParser/DataTypes/Tree.h \
     Tests/DataTypes/TestTree.h \
-    URILinkParser/URI/URIHandler.h
+    URILinkParser/URI/URIHandler.h \
+    URILinkParser/URI/RFC2396Schema.h \
+    Tests/URI/TestRFC2396Schema.h \
     URILinkParser/URI/URIParser.h
 
 INCLUDEPATH += ./usr/include/boost/

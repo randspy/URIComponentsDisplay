@@ -1,6 +1,11 @@
 #ifndef URIHANDLER_H
 #define URIHANDLER_H
 
+#include <string>
+
+#include "../DataTypes/Component.h"
+#include "../DataTypes/Tree.h"
+
 namespace URI
 {
 
@@ -11,22 +16,22 @@ public:
     {
     }
 
-    void setNext(URIHandler *n)
+    void setNext(URIHandler *next)
     {
-        next = n;
+        _nextHandler = next;
     }
 
 
-    virtual void handle(const std::string& uri)
+    virtual void parse(const std::string& uri, DataTypes::Tree<DataTypes::Component>* outputCompTree)
     {
-        if(next)
+        if(_nextHandler)
         {
-            next->handle(uri);
+            _nextHandler->parse(uri, outputCompTree);
         }
     }
 
 private:
-    URIHandler *next;
+    URIHandler *_nextHandler;
 };
 
 }
