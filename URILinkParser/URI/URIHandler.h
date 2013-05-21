@@ -12,7 +12,7 @@ namespace URI
 class URIHandler
 {
 public:
-    URIHandler()
+    URIHandler() : _nextHandler(NULL)
     {
     }
 

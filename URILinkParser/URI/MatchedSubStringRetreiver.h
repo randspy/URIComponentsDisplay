@@ -14,6 +14,7 @@ public:
     virtual ~MatchedSubStringRetreiver();
 
     virtual void serch(const std::string& str);
+    virtual void match(const std::string& str);
     virtual bool isMatching() const;
     virtual int getLength() const;
     virtual std::string getMatch() const;

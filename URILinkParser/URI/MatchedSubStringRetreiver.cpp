@@ -15,9 +15,17 @@ MatchedSubStringRetreiver::~MatchedSubStringRetreiver()
 void MatchedSubStringRetreiver::serch(const std::string& str)
 {
     boost::match_results<std::string::const_iterator> result;
-    boost::match_flag_type flags = boost::match_default;
 
-    regex_search(str, result, _reg, flags) ?
+    boost::regex_search(str, result, _reg) ?
+        _matchedString = std::string(result[0].first, result[0].second) :
+        _matchedString = "";
+}
+
+void MatchedSubStringRetreiver::match(const std::string &str)
+{
+    boost::match_results<std::string::const_iterator> result;
+
+    boost::regex_match(str, result, _reg) ?
         _matchedString = std::string(result[0].first, result[0].second) :
         _matchedString = "";
 }

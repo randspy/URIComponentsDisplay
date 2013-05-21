@@ -27,14 +27,31 @@ std::string RFC2396Schema::schemaValue(const std::string& schemaRowElem)
     return schemaValueRegex.getMatch();
 }
 
+bool RFC2396Schema::isSchemaValid(const std::string& uri)
+{
+    MatchedSubStringRetreiver schemaIsValid("[a-zA-Z][a-zA-Z0-9+-.]*:");
+    schemaIsValid.match(uri);
+
+    if(schemaIsValid.isMatching())
+    {
+        return true;
+    }
+
+    return false;
+}
+
 void RFC2396Schema::parse(const std::string& uri, DataTypes::Tree<DataTypes::Component>* outputCompTree)
 {
     MatchedSubStringRetreiver schemaIdentification("^(([^:/?#]+):)");
 
     schemaIdentification.serch(uri);
+
     if(schemaIdentification.isMatching())
     {
-        DataTypes::Component elem(schemaValue(schemaIdentification.getMatch()), true);
+        DataTypes::Component elem(
+                    schemaValue(schemaIdentification.getMatch()),
+                    isSchemaValid(schemaIdentification.getMatch()));
+
         addSchemaToComponentList(outputCompTree, elem);
     }
 

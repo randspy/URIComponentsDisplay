@@ -29,4 +29,14 @@ void TestSubStringRegexMatcher::subStringDoNotMatch()
     QCOMPARE(matcher.getLength(), 0);
 }
 
+void TestSubStringRegexMatcher::stringMatch()
+{
+    URI::MatchedSubStringRetreiver matcher("[a-z]{2}2[a-z]");
+
+    matcher.match("ww2x");
+    QCOMPARE(matcher.isMatching(), true);
+    QCOMPARE(matcher.getMatch().c_str(), "ww2x");
+    QCOMPARE(matcher.getLength(), 4);
+}
+
 }

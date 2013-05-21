@@ -15,6 +15,7 @@ public:
 
 private slots:
     void schemaMatch();
+    void schemaIsInvalid();
 };
 
 DECLARE_TEST(TestRFC2396Schema)

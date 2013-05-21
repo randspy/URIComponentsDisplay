@@ -14,6 +14,7 @@ public:
     virtual void parse(const std::string& uri, DataTypes::Tree<DataTypes::Component>* outputCompTree);
 
 private:
+    bool isSchemaValid(const std::string& uri);
     void addSchemaToComponentList(DataTypes::Tree<DataTypes::Component>* outputCompTree, DataTypes::Component schema);
     std::string schemaValue(const std::string& schemaRowElem);
 };

@@ -16,6 +16,7 @@ private slots:
 
     void subStringMatch();
     void subStringDoNotMatch();
+    void stringMatch();
 };
 
 
