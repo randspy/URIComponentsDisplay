@@ -1,7 +1,5 @@
 #include "RFC2396Authority.h"
 
-#include "MatchedSubStringRetreiver.h"
-
 namespace URI
 {
 

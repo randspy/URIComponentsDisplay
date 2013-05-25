@@ -1,7 +1,5 @@
 #include "RFC2396Schema.h"
 
-#include "MatchedSubStringRetreiver.h"
-
 namespace URI
 {
 

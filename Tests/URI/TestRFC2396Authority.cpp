@@ -17,19 +17,19 @@ void TestRFC2396Authority::authorityMatch()
     DataTypes::Tree<DataTypes::Component>* tree = new DataTypes::Tree<DataTypes::Component>();
 
     handler.parse("//www.ics.uci.edu", tree);
-    DataTypes::Component aSchema = tree->getChild(0).getValue();
+    DataTypes::Component component = tree->getChild(0).getValue();
 
     QCOMPARE(tree->getChild(0).getTagName().c_str(), "authority");
-    QCOMPARE(aSchema.getValue().c_str(), "www.ics.uci.edu");
-    QCOMPARE(aSchema.isValid(), true);
+    QCOMPARE(component.getValue().c_str(), "www.ics.uci.edu");
+    QCOMPARE(component.isValid(), true);
 
     handler.parse("//www.ics.uci.edu#sd", tree);
-    aSchema = tree->getChild(1).getValue();
-    QCOMPARE(aSchema.getValue().c_str(), "www.ics.uci.edu");
+    component = tree->getChild(1).getValue();
+    QCOMPARE(component.getValue().c_str(), "www.ics.uci.edu");
 
     handler.parse("//www.ics.uci.edu?sd", tree);
-    aSchema = tree->getChild(1).getValue();
-    QCOMPARE(aSchema.getValue().c_str(), "www.ics.uci.edu");
+    component = tree->getChild(1).getValue();
+    QCOMPARE(component.getValue().c_str(), "www.ics.uci.edu");
 
     delete tree;
 }
