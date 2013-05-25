@@ -15,6 +15,7 @@ public:
 
 private slots:
     void authorityMatch();
+    void authorityDoNotMatch();
 };
 
 DECLARE_TEST(TestRFC2396Authority)

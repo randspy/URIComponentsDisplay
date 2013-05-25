@@ -1,19 +1,16 @@
 #ifndef RFC2396AUTHORITY_H
 #define RFC2396AUTHORITY_H
 
-#include "URIHandler.h"
+#include "RFC2396Handler.h"
 
 namespace URI
 {
 
-class RFC2396Authority : public URIHandler
+class RFC2396Authority : public RFC2396Handler
 {
 public:
     RFC2396Authority();
     virtual ~RFC2396Authority();
-
-    virtual void parse(const std::string& uri, DataTypes::Tree<DataTypes::Component>* outputCompTree);
-
 };
 
 }

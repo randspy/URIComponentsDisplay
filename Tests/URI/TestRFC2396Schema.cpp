@@ -18,8 +18,10 @@ void TestRFC2396Schema::schemaMatch()
     handler.parse("htt.23+.-p://www.ics.uci.edu", tree);
     DataTypes::Component aSchema = tree->getChild(0).getValue();
 
-    QCOMPARE(aSchema.getValue(), std::string("htt.23+.-p"));
+    QCOMPARE(aSchema.getValue().c_str(), "htt.23+.-p");
     QCOMPARE(aSchema.isValid(), true);
+
+    delete tree;
 }
 
 void TestRFC2396Schema::schemaIsInvalid()
@@ -31,14 +33,16 @@ void TestRFC2396Schema::schemaIsInvalid()
     handler.parse("1http://www.ics.uci.edu", tree);
     DataTypes::Component aSchema = tree->getChild(0).getValue();
 
-    QCOMPARE(aSchema.getValue(), std::string("1http"));
+    QCOMPARE(aSchema.getValue().c_str(), "1http");
     QCOMPARE(aSchema.isValid(), false);
 
     handler.parse("htt&p://www.ics.uci.edu", tree);
     aSchema = tree->getChild(1).getValue();
 
-    QCOMPARE(aSchema.getValue(), std::string("htt&p"));
+    QCOMPARE(aSchema.getValue().c_str(), "htt&p");
     QCOMPARE(aSchema.isValid(), false);
+
+    delete tree;
 }
 
 }

@@ -19,7 +19,6 @@ private slots:
     void addValue();
     void getChilds();
     void noValidChildAccessChilds();
-    void traversal();
 };
 
 

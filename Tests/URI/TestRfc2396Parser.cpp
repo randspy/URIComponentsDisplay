@@ -64,8 +64,8 @@ void TestRFC2396URIStandardParser::schema()
     URI::RFC2396URIStandardParser::Components comp = uriParser.getParsedComponents();
     DataTypes::Component aSchema = comp->getChild(0).getValue();
 
-    QCOMPARE(aSchema.getValue(), std::string("http"));
-    QCOMPARE(comp->getChild(0).getTagName(), std::string("schema"));
+    QCOMPARE(aSchema.getValue().c_str(), "http");
+    QCOMPARE(comp->getChild(0).getTagName().c_str(), "schema");
 }
 
 }

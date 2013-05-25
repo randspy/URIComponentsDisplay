@@ -2,6 +2,7 @@
 #define URIHANDLER_H
 
 #include <string>
+#include <boost/shared_ptr.hpp>
 
 #include "../DataTypes/Component.h"
 #include "../DataTypes/Tree.h"
@@ -12,11 +13,14 @@ namespace URI
 class URIHandler
 {
 public:
-    URIHandler() : _nextHandler(NULL)
+    URIHandler()
+    {
+    }
+    virtual ~URIHandler()
     {
     }
 
-    void setNext(URIHandler *next)
+    void setNext(const boost::shared_ptr<URIHandler>& next)
     {
         _nextHandler = next;
     }
@@ -31,7 +35,7 @@ public:
     }
 
 private:
-    URIHandler *_nextHandler;
+    boost::shared_ptr<URIHandler> _nextHandler;
 };
 
 }
