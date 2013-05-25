@@ -1,5 +1,6 @@
 #include "RFC2396URIStandardParser.h"
 #include "../URI/MatchedSubStringRetreiver.h"
+#include "RFC2396Schema.h"
 
 namespace URI
 {
@@ -37,10 +38,9 @@ RFC2396URIStandardParser::Components RFC2396URIStandardParser::getParsedComponen
 {
     DataTypes::Tree<DataTypes::Component>* component = new DataTypes::Tree<DataTypes::Component>();
 
-    DataTypes::Tree<DataTypes::Component> schema;
-//    schema.setValue(extractComponent("^(([^:/?#]+):)", "[^:/?#]+"));
+    RFC2396Schema schema;
+    schema.parse(_uri, component);
 
-    component->addChild(schema);
     return Components(component);
 }
 

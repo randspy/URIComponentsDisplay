@@ -10,6 +10,14 @@ TestTree::TestTree()
 {
 }
 
+void TestTree::addName()
+{
+    DataTypes::Tree<std::string> aTree;
+
+    aTree.setTagName("name");
+    QCOMPARE(aTree.getTagName(), std::string("name"));
+}
+
 void TestTree::addValue()
 {
     DataTypes::Tree<std::string> aTree;

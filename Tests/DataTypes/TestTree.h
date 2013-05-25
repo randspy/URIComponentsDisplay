@@ -15,6 +15,7 @@ public:
 
 private slots:
 
+    void addName();
     void addValue();
     void getChilds();
     void noValidChildAccessChilds();

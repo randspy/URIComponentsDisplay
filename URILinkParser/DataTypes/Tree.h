@@ -14,6 +14,9 @@ public:
     Tree(){}
     ~Tree(){}
 
+    std::string getTagName() const { return _tagName; }
+    void setTagName(const std::string& name) { _tagName = name;}
+
     T getValue() const { return _value; }
     void setValue(const T& value) { _value = value; }
 
@@ -31,6 +34,7 @@ public:
     }
 
 private:
+    std::string _tagName;
     T _value;
     std::vector<Tree> _childs;
 };
