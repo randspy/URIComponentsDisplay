@@ -24,7 +24,7 @@ public:
 
     unsigned int numberOfChilds() const { return _childs.size(); }
 
-    const Tree& getChild(unsigned int index)
+    Tree& getChild(unsigned int index)
     {
         if(index < numberOfChilds())
         {

@@ -3,6 +3,9 @@
 
 #include "../AutoTest.h"
 
+#include <boost/shared_ptr.hpp>
+#include "URILinkParser/URI/URIHandler.h"
+
 namespace UnitTest
 {
 
@@ -16,6 +19,10 @@ public:
 private slots:
     void authorityMatch();
     void authorityDoNotMatch();
+    void subcomponents();
+
+private:
+    boost::shared_ptr<URI::URIHandler> createSubComponents();
 };
 
 DECLARE_TEST(TestRFC2396Authority)

@@ -27,6 +27,8 @@ void TestRFC2396Host::hostMatch()
     component = tree->getChild(1).getValue();
 
     QCOMPARE(component.getValue().c_str(), "host.fr");
+
+    delete tree;
 }
 
 }

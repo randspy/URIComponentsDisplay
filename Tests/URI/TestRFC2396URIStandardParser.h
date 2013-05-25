@@ -1,7 +1,10 @@
-#ifndef TESTRFC2396PARSER_H
-#define TESTRFC2396PARSER_H
+#ifndef TESTRFC2396STANDARDPARSER_H
+#define TESTRFC2396STANDARDPARSER_H
 
 #include "../AutoTest.h"
+
+#include <boost/shared_ptr.hpp>
+#include "URILinkParser/URI/URIHandler.h"
 
 namespace UnitTest
 {
@@ -21,6 +24,11 @@ private slots:
     void schemaComponentIsCorupted();
     void urnSchema();
     void schema();
+    void allComponentsPresent();
+    void subComponentsInPath();
+
+private:
+    boost::shared_ptr<URI::URIHandler> createAllComponents();
 };
 
 
@@ -28,4 +36,4 @@ DECLARE_TEST(TestRFC2396URIStandardParser)
 
 }
 
-#endif // TESTRFC2396PARSER_H
+#endif // TESTRFC2396STANDARDPARSER_H

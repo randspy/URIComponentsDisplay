@@ -29,6 +29,11 @@ void RFC2396Handler::parse(const std::string &uri, DataTypes::Tree<DataTypes::Co
                     isComponentValid(_identificationRegex.getMatch()));
 
         addToComponentsList(outputCompTree, elem);
+        URIHandler::parse(uri.substr(_identificationRegex.getLength()), outputCompTree);
+    }
+    else
+    {
+         URIHandler::parse(uri, outputCompTree);
     }
 }
 

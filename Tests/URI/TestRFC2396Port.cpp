@@ -21,6 +21,8 @@ void TestRFC2396Port::portMatch()
     QCOMPARE(tree->getChild(0).getTagName().c_str(), "port");
     QCOMPARE(component.getValue().c_str(), "8008");
     QCOMPARE(component.isValid(), true);
+
+    delete tree;
 }
 
 }

@@ -23,10 +23,12 @@ protected:
 public:
     virtual void parse(const std::string& uri, DataTypes::Tree<DataTypes::Component>* outputCompTree);
 
-private:
-    std::string getComponentValue(const std::string& compWithItsIndicators);
-    bool isComponentValid(const std::string& uri);
-    void addToComponentsList(DataTypes::Tree<DataTypes::Component>* outputCompTree, DataTypes::Component schema);
+protected:
+    virtual std::string getComponentValue(const std::string& compWithItsIndicators);
+    virtual bool isComponentValid(const std::string& uri);
+    virtual void addToComponentsList(DataTypes::Tree<DataTypes::Component>* outputCompTree, DataTypes::Component schema);
+
+    MatchedSubStringRetreiver& getIdentificationRegex() { return _identificationRegex; }
 
 private:
     std::string _componentName;

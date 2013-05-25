@@ -13,16 +13,41 @@ TEMPLATE = app
 
 HEADERS += Tests/AutoTest.h \
     Tests/TestRfc2396Parser.h \
+    URI/URIComponents.h \
+    URI/URIParser.h \
     URI/RFC2396URIStandardParser.h \
     URI/URIComponents.h \
     URI/MatchedSubStringRetreiver.h \
-    URI/URIParser.h
+    DataTypes/Component.h \
+    DataTypes/Tree.h \
+    URI/URIHandler.h \
+    URI/RFC2396Schema.h \
+    URI/URIParser.h \
+    URI/RFC2396Authority.h \
+    URI/RFC2396Handler.h \
+    URI/RFC2396Path.h \
+    URI/RFC2396Query.h \
+    URI/RFC2396Fragment.h \
+    URI/RFC2396UserInfo.h \
+    URI/RFC2396Host.h \
+    URI/RFC2396Port.h \
+    URI/RFC2396HandlerWithSubComponents.h \
 
 
 SOURCES += main.cpp\
         MainWindow.cpp\
         URI/RFC2396URIStandardParser.cpp \
-        URI/MatchedSubStringRetreiver.cpp
+        URI/MatchedSubStringRetreiver.cpp \
+        URI/RFC2396Schema.cpp \
+        URI/RFC2396Authority.cpp \
+        URI/RFC2396Handler.cpp \
+        URI/RFC2396Path.cpp \
+        URI/RFC2396Query.cpp \
+        URI/RFC2396Fragment.cpp \
+        URI/RFC2396UserInfo.cpp \
+        URI/RFC2396Host.cpp \
+        URI/RFC2396Port.cpp \
+        URI/RFC2396HandlerWithSubComponents.cpp \
 
 HEADERS  += MainWindow.h
 

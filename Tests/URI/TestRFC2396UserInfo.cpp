@@ -21,6 +21,8 @@ void TestRFC2396UserInfo::userInfoMatch()
     QCOMPARE(tree->getChild(0).getTagName().c_str(), "user information");
     QCOMPARE(component.getValue().c_str(), "john.doe");
     QCOMPARE(component.isValid(), true);
+
+    delete tree;
 }
 
 void TestRFC2396UserInfo::userInfoDoNotMatch()
@@ -32,6 +34,8 @@ void TestRFC2396UserInfo::userInfoDoNotMatch()
     handler.parse("//john.doe.com", tree);
 
     QVERIFY_THROW(tree->getChild(0), std::out_of_range);
+
+    delete tree;
 }
 
 }
