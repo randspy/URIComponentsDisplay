@@ -1,17 +1,17 @@
-#include "TestMatchedSubStringRetreiver.h"
+#include "TestRegex.h"
 
-#include "URILinkParser/URI/MatchedSubStringRetreiver.h"
+#include "URILinkParser/URI/Regex.h"
 
 namespace UnitTest
 {
 
-TestSubStringRegexMatcher::TestSubStringRegexMatcher()
+TestRegex::TestRegex()
 {
 }
 
-void TestSubStringRegexMatcher::subStringMatch()
+void TestRegex::subStringMatch()
 {
-    URI::MatchedSubStringRetreiver matcher("([^:/?#]+):");
+    URI::Regex matcher("([^:/?#]+):");
 
     matcher.serch("http://www.ietf.org/rfc/rfc2396.txt");
     QCOMPARE(matcher.isMatching(), true);
@@ -19,9 +19,9 @@ void TestSubStringRegexMatcher::subStringMatch()
     QCOMPARE(matcher.getLength(), 5);
 }
 
-void TestSubStringRegexMatcher::subStringDoNotMatch()
+void TestRegex::subStringDoNotMatch()
 {
-    URI::MatchedSubStringRetreiver matcher("([^:/?#]+):");
+    URI::Regex matcher("([^:/?#]+):");
 
     matcher.serch("//www.ietf.org/rfc/rfc2396.txt");
     QCOMPARE(matcher.isMatching(), false);
@@ -29,9 +29,9 @@ void TestSubStringRegexMatcher::subStringDoNotMatch()
     QCOMPARE(matcher.getLength(), 0);
 }
 
-void TestSubStringRegexMatcher::stringMatch()
+void TestRegex::stringMatch()
 {
-    URI::MatchedSubStringRetreiver matcher("[a-z]{2}2[a-z]");
+    URI::Regex matcher("[a-z]{2}2[a-z]");
 
     matcher.match("ww2x");
     QCOMPARE(matcher.isMatching(), true);

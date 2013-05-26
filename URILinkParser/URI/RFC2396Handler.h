@@ -3,16 +3,13 @@
 
 #include "URIHandler.h"
 
-#include "MatchedSubStringRetreiver.h"
+#include "Regex.h"
 
 namespace URI
 {
 
 class RFC2396Handler: public URIHandler
 {
-public:
-    virtual ~RFC2396Handler();
-
 protected:
     RFC2396Handler(const std::string& componentName,
                    const std::string& identificationRegex,
@@ -21,6 +18,8 @@ protected:
                    );
 
 public:
+    virtual ~RFC2396Handler();
+
     virtual void parse(const std::string& uri, DataTypes::Tree<DataTypes::Component>* outputCompTree);
 
 protected:
@@ -28,13 +27,14 @@ protected:
     virtual bool isComponentValid(const std::string& uri);
     virtual void addToComponentsList(DataTypes::Tree<DataTypes::Component>* outputCompTree, DataTypes::Component schema);
 
-    MatchedSubStringRetreiver& getIdentificationRegex() { return _identificationRegex; }
+    Regex& getIdentificationRegex() { return _identificationRegex; }
+    Regex& getValidationRegex() { return _componentValidationRegex; }
 
 private:
     std::string _componentName;
-    MatchedSubStringRetreiver _identificationRegex;
-    MatchedSubStringRetreiver _componentValidationRegex;
-    MatchedSubStringRetreiver _componentValueRegex;
+    Regex _identificationRegex;
+    Regex _componentValidationRegex;
+    Regex _componentValueRegex;
 };
 
 }

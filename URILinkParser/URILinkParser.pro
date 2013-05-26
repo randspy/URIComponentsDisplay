@@ -11,7 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = URILinkParser
 TEMPLATE = app
 
-HEADERS += URI/MatchedSubStringRetreiver.h \
+HEADERS += URI/Regex.h \
     DataTypes/Component.h \
     DataTypes/Tree.h \
     URI/URIHandler.h \
@@ -31,7 +31,7 @@ HEADERS += URI/MatchedSubStringRetreiver.h \
 
 SOURCES += main.cpp\
         MainWindow.cpp\
-        URI/MatchedSubStringRetreiver.cpp \
+        URI/Regex.cpp \
         URI/RFC2396Schema.cpp \
         URI/RFC2396Authority.cpp \
         URI/RFC2396Handler.cpp \

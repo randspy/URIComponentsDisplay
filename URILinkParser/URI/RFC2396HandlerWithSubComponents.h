@@ -22,9 +22,9 @@ protected:
                    const boost::shared_ptr<URIHandler>& subHandlers
                    );
 
+public:
     virtual ~RFC2396HandlerWithSubComponents();
 
-public:
     virtual void parse(const std::string& uri, DataTypes::Tree<DataTypes::Component>* outputCompTree);
 
 private:

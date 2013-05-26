@@ -1,18 +1,18 @@
-#include "MatchedSubStringRetreiver.h"
+#include "Regex.h"
 
 namespace URI
 {
 
-MatchedSubStringRetreiver::MatchedSubStringRetreiver(const std::string& regex)
+Regex::Regex(const std::string& regex)
     : _reg(regex)
 {
 }
 
-MatchedSubStringRetreiver::~MatchedSubStringRetreiver()
+Regex::~Regex()
 {
 }
 
-void MatchedSubStringRetreiver::serch(const std::string& str)
+void Regex::serch(const std::string& str)
 {
     boost::match_results<std::string::const_iterator> result;
 
@@ -21,7 +21,7 @@ void MatchedSubStringRetreiver::serch(const std::string& str)
         _matchedString = "";
 }
 
-void MatchedSubStringRetreiver::match(const std::string &str)
+void Regex::match(const std::string &str)
 {
     boost::match_results<std::string::const_iterator> result;
 
@@ -30,17 +30,17 @@ void MatchedSubStringRetreiver::match(const std::string &str)
         _matchedString = "";
 }
 
-bool MatchedSubStringRetreiver::isMatching() const
+bool Regex::isMatching() const
 {
     return !_matchedString.empty();
 }
 
-int MatchedSubStringRetreiver::getLength() const
+int Regex::getLength() const
 {
     return _matchedString.length();
 }
 
-std::string MatchedSubStringRetreiver::getMatch() const
+std::string Regex::getMatch() const
 {
     return _matchedString;
 }

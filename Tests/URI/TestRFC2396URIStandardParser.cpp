@@ -43,6 +43,8 @@ void TestRFC2396URIStandardParser::allComponentsPresent()
     QCOMPARE(tree->getChild(2).getTagName().c_str(), "path");
     QCOMPARE(tree->getChild(2).getValue().getValue().c_str(), "over/there/index.dtb");
 
+    QVERIFY_THROW(tree->getChild(2).getChild(0), std::out_of_range);
+
     QCOMPARE(tree->getChild(3).getTagName().c_str(), "query");
     QCOMPARE(tree->getChild(3).getValue().getValue().c_str(), "type=animal&name=narwhal");
 
@@ -71,6 +73,21 @@ void TestRFC2396URIStandardParser::subComponentsInPath()
     QCOMPARE(child.getChild(1).getValue().getValue().c_str(), "example.com");
 
     QVERIFY_THROW(child.getChild(2), std::out_of_range);
+
+    delete tree;
+}
+
+void TestRFC2396URIStandardParser::subComponentsCantShowUpTwice()
+{
+    boost::shared_ptr<URI::URIHandler> component = createAllComponents();
+
+    DataTypes::Tree<DataTypes::Component>* tree = new DataTypes::Tree<DataTypes::Component>();
+
+    component->parse("foo://fred@example.com/john@example.com?al", tree);
+
+    DataTypes::Tree<DataTypes::Component>& path = tree->getChild(2);
+
+    QVERIFY_THROW(path.getChild(0), std::out_of_range);
 
     delete tree;
 }

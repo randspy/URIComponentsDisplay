@@ -16,7 +16,6 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    URILinkParser/URI/MatchedSubStringRetreiver.cpp \
     Tests/URI/TestMatchedSubStringRetreiver.cpp \
     Tests/DataTypes/TestTree.cpp \
     URILinkParser/URI/RFC2396Schema.cpp \
@@ -37,11 +36,10 @@ SOURCES += main.cpp \
     URILinkParser/URI/RFC2396Port.cpp \
     Tests/URI/TestRFC2396Port.cpp \
     URILinkParser/URI/RFC2396HandlerWithSubComponents.cpp \
-    Tests/URI/TestRFC2396URIStandardParser.cpp
+    Tests/URI/TestRFC2396URIStandardParser.cpp \
+    URILinkParser/URI/Regex.cpp
 
 HEADERS += Tests/AutoTest.h \
-    URILinkParser/URI/MatchedSubStringRetreiver.h \
-    Tests/URI/TestMatchedSubStringRetreiver.h \
     URILinkParser/DataTypes/Component.h \
     URILinkParser/DataTypes/Tree.h \
     Tests/DataTypes/TestTree.h \
@@ -64,7 +62,9 @@ HEADERS += Tests/AutoTest.h \
     URILinkParser/URI/RFC2396Port.h \
     Tests/URI/TestRFC2396Port.h \
     URILinkParser/URI/RFC2396HandlerWithSubComponents.h \
-    Tests/URI/TestRFC2396URIStandardParser.h
+    Tests/URI/TestRFC2396URIStandardParser.h \
+    URILinkParser/URI/Regex.h \
+    Tests/URI/TestRegex.h
 
 INCLUDEPATH += ./usr/include/boost/
 LIBS += -L/usr/lib/ -lboost_regex

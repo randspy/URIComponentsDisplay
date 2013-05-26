@@ -1,5 +1,5 @@
-#ifndef MATCHEDSUBSTRINGRETREIVER_H
-#define MATCHEDSUBSTRINGRETREIVER_H
+#ifndef REGEX_H
+#define REGEX_H
 
 #include <string>
 #include <boost/regex.hpp>
@@ -7,11 +7,11 @@
 namespace URI
 {
 
-class MatchedSubStringRetreiver
+class Regex
 {
 public:
-    MatchedSubStringRetreiver(const std::string& regex);
-    virtual ~MatchedSubStringRetreiver();
+    Regex(const std::string& regex);
+    virtual ~Regex();
 
     virtual void serch(const std::string& str);
     virtual void match(const std::string& str);
@@ -25,4 +25,4 @@ private:
 };
 
 }
-#endif // MATCHEDSUBSTRINGRETREIVER_H
+#endif // REGEX_H
