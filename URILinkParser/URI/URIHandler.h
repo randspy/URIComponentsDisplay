@@ -22,7 +22,14 @@ public:
 
     void setNext(const boost::shared_ptr<URIHandler>& next)
     {
-        _nextHandler = next;
+        if(_nextHandler)
+        {
+            _nextHandler->setNext(next);
+        }
+        else
+        {
+            _nextHandler = next;
+        }
     }
 
 

@@ -11,13 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = URILinkParser
 TEMPLATE = app
 
-HEADERS += Tests/AutoTest.h \
-    Tests/TestRfc2396Parser.h \
-    URI/URIComponents.h \
-    URI/URIParser.h \
-    URI/RFC2396URIStandardParser.h \
-    URI/URIComponents.h \
-    URI/MatchedSubStringRetreiver.h \
+HEADERS += URI/MatchedSubStringRetreiver.h \
     DataTypes/Component.h \
     DataTypes/Tree.h \
     URI/URIHandler.h \
@@ -32,11 +26,11 @@ HEADERS += Tests/AutoTest.h \
     URI/RFC2396Host.h \
     URI/RFC2396Port.h \
     URI/RFC2396HandlerWithSubComponents.h \
+    Builder/URIHandlerBuilder.h
 
 
 SOURCES += main.cpp\
         MainWindow.cpp\
-        URI/RFC2396URIStandardParser.cpp \
         URI/MatchedSubStringRetreiver.cpp \
         URI/RFC2396Schema.cpp \
         URI/RFC2396Authority.cpp \
@@ -48,6 +42,7 @@ SOURCES += main.cpp\
         URI/RFC2396Host.cpp \
         URI/RFC2396Port.cpp \
         URI/RFC2396HandlerWithSubComponents.cpp \
+        Builder/URIHandlerBuilder.cpp
 
 HEADERS  += MainWindow.h
 

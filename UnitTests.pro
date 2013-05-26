@@ -16,7 +16,6 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    URILinkParser/URI/RFC2396URIStandardParser.cpp \
     URILinkParser/URI/MatchedSubStringRetreiver.cpp \
     Tests/URI/TestMatchedSubStringRetreiver.cpp \
     Tests/DataTypes/TestTree.cpp \
@@ -41,8 +40,6 @@ SOURCES += main.cpp \
     Tests/URI/TestRFC2396URIStandardParser.cpp
 
 HEADERS += Tests/AutoTest.h \
-    URILinkParser/URI/RFC2396URIStandardParser.h \
-    URILinkParser/URI/URIComponents.h \
     URILinkParser/URI/MatchedSubStringRetreiver.h \
     Tests/URI/TestMatchedSubStringRetreiver.h \
     URILinkParser/DataTypes/Component.h \
@@ -51,7 +48,6 @@ HEADERS += Tests/AutoTest.h \
     URILinkParser/URI/URIHandler.h \
     URILinkParser/URI/RFC2396Schema.h \
     Tests/URI/TestRFC2396Schema.h \
-    URILinkParser/URI/URIParser.h \
     URILinkParser/URI/RFC2396Authority.h \
     Tests/URI/TestRFC2396Authority.h \
     URILinkParser/URI/RFC2396Handler.h \

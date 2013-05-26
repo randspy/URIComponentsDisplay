@@ -82,13 +82,9 @@ boost::shared_ptr<URI::URIHandler> TestRFC2396Authority::createSubComponents()
 {
     boost::shared_ptr<URI::URIHandler> userInfo =
             boost::shared_ptr<URI::URIHandler>(new URI::RFC2396UserInfo());
-    boost::shared_ptr<URI::URIHandler> host =
-            boost::shared_ptr<URI::URIHandler>(new URI::RFC2396Host());
-    boost::shared_ptr<URI::URIHandler> port =
-            boost::shared_ptr<URI::URIHandler>(new URI::RFC2396Port());
 
-    host->setNext(port);
-    userInfo->setNext(host);
+    userInfo->setNext(boost::shared_ptr<URI::URIHandler>(new URI::RFC2396Host()));
+    userInfo->setNext(boost::shared_ptr<URI::URIHandler>(new URI::RFC2396Port()));
 
     return userInfo;
 }

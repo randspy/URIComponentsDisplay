@@ -18,12 +18,6 @@ public:
 
 private slots:
 
-    void missingFragmentComponent();
-    void missingQueryComponent();
-    void missingSchemaComponent();
-    void schemaComponentIsCorupted();
-    void urnSchema();
-    void schema();
     void allComponentsPresent();
     void subComponentsInPath();
 

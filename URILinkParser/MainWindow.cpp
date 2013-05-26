@@ -3,17 +3,18 @@
 
 #include <QTableWidget>
 #include <QScopedPointer>
-#include <QTableWidgetItem>
-#include <QTableWidget>
+#include <QTreeWidget>
 
-#include "URI/RFC2396URIStandardParser.h"
+#include "Builder/URIHandlerBuilder.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->compTree->setHeaderHidden(true);
     connect(ui->breakURIIntoComponents, SIGNAL(released()), this, SLOT(breakURIIntoComponents()));
+    connect(ui->URI, SIGNAL(returnPressed()), this, SLOT(breakURIIntoComponents()));
 }
 
 MainWindow::~MainWindow()
@@ -23,67 +24,50 @@ MainWindow::~MainWindow()
 
 void MainWindow::breakURIIntoComponents()
 {
-    QScopedPointer<URI::URIParser> parser(new URI::RFC2396URIStandardParser(ui->URI->text().toStdString()));
-    URI::URIComponents components = parser->parseURI();
+    ui->compTree->clear();
 
-    fillTable(convertComponentsToTableForm(components));
+    BL::URIHandlerBuilder builder;
+    boost::shared_ptr<URI::URIHandler> handler = builder.buildChainOfResponsibility();
+    DataTypes::Tree<DataTypes::Component>components;
+
+    handler->parse(ui->URI->text().toStdString(), &components);
+
+
+    addComponentLevelToTreeWidget(components);
+
 }
 
-QVector<MainWindow::Pair> MainWindow::convertComponentsToTableForm(const URI::URIComponents& components)
+
+void MainWindow::addComponentLevelToTreeWidget(DataTypes::Tree<DataTypes::Component>& components)
 {
-
-    QVector<MainWindow::Pair> virtualTable;
-
-#define PUSH_BACK(first,second)    if(!second.isEmpty()) \
-                                    {\
-                                        virtualTable.push_back(Pair(first, second));\
-                                    }
-
-    PUSH_BACK("Schema", QString(components.getSchema().c_str()));
-    PUSH_BACK("Authority", QString(components.getAuthority().c_str()));
-    PUSH_BACK("Path", QString(components.getPath().c_str()));
-    PUSH_BACK("Query", QString(components.getQuery().c_str()));
-    PUSH_BACK("Fragment", QString(components.getFragment().c_str()));
-
-#undef PUSH_BACK
-
-    return virtualTable;
-}
-
-void MainWindow::fillTable(const QVector<MainWindow::Pair>& virtualTable)
-{
-    int numOfRows = virtualTable.size();
-
-    if(numOfRows)
+    QList<QTreeWidgetItem *> items;
+    unsigned int numberOfComponents = components.numberOfChilds();
+    for (unsigned int idx = 0; idx < numberOfComponents; ++idx)
     {
-        ui->components->setColumnCount(2);
-        ui->components->setRowCount(numOfRows);
+        QString tagName = components.getChild(idx).getTagName().c_str();
+        QString value = components.getChild(idx).getValue().getValue().c_str();
+        QTreeWidgetItem* item = new QTreeWidgetItem();
+        item->setText(0,  tagName + " : " + value);
+        items.append(item);
 
-        fillTableItems(virtualTable);
-
-        ui->components->resizeColumnToContents(0);
-        ui->components->horizontalHeader()->setStretchLastSection(true);
+        addSubComponents(item, components.getChild(idx));
     }
-    else
-    {
-        ui->components->setColumnCount(0);
-        ui->components->setRowCount(0);
-    }
+
+    ui->compTree->insertTopLevelItems(0, items);
 }
 
-void MainWindow::fillTableItems(const QVector<MainWindow::Pair>& virtualTable)
+void MainWindow::addSubComponents(QTreeWidgetItem* item, DataTypes::Tree<DataTypes::Component>& components)
 {
-    int numOfRows = virtualTable.size();
+    unsigned numberOfComponents = components.numberOfChilds();
 
-    for(int idx = 0; idx < numOfRows; ++idx)
+    for(unsigned int idx = 0; idx < numberOfComponents; ++idx)
     {
-        QTableWidgetItem* componentName = new QTableWidgetItem(virtualTable[idx].first);
-        componentName->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
+        QString tagName = components.getChild(idx).getTagName().c_str();
+        QString value = components.getChild(idx).getValue().getValue().c_str();
+        QTreeWidgetItem* child = new QTreeWidgetItem();
+        child->setText(0,  tagName + " : " + value);
+        item->addChild(child);
 
-        QTableWidgetItem* componentValue = new QTableWidgetItem(virtualTable[idx].second);
-        componentValue->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-
-        ui->components->setItem(idx, 0, componentName);
-        ui->components->setItem(idx, 1, componentValue);
+        addSubComponents(child, components.getChild(idx));
     }
 }

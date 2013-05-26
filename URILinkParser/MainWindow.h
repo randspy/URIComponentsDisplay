@@ -4,8 +4,10 @@
 #include <QMainWindow>
 #include <QPair>
 #include <QVector>
+#include <QTreeWidgetItem>
 
-#include "URI/URIComponents.h"
+#include "DataTypes/Component.h"
+#include "DataTypes/Tree.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,16 +21,14 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     
-    public slots:
+public slots:
 
     void breakURIIntoComponents();
 
 private:
-    typedef QPair<QString, QString> Pair;
+    void addComponentLevelToTreeWidget(DataTypes::Tree<DataTypes::Component>& components);
+    void addSubComponents(QTreeWidgetItem* item, DataTypes::Tree<DataTypes::Component>& components);
 
-    QVector<Pair> convertComponentsToTableForm(const URI::URIComponents& components);
-    void fillTable(const QVector<MainWindow::Pair>& virtualTable);
-    void fillTableItems(const QVector<MainWindow::Pair>& virtualTable);
 
 private:
     Ui::MainWindow *ui;
