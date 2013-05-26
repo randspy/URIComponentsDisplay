@@ -11,9 +11,6 @@ class RFC2396UserInfo : public RFC2396Handler
 public:
     RFC2396UserInfo();
     virtual ~RFC2396UserInfo();
-
-    virtual void parse(const std::string& uri, DataTypes::Tree<DataTypes::Component>* outputCompTree);
-
 };
 
 }

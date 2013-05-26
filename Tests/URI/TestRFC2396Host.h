@@ -15,6 +15,7 @@ public:
 
 private slots:
     void hostMatch();
+    void hostWithSquareBrackets();
 };
 
 DECLARE_TEST(TestRFC2396Host)

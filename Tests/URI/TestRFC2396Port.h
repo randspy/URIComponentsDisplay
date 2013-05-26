@@ -15,6 +15,7 @@ public:
 
 private slots:
     void portMatch();
+    void portIsInvalid();
 };
 
 DECLARE_TEST(TestRFC2396Port)

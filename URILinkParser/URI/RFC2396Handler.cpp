@@ -58,7 +58,7 @@ bool RFC2396Handler::isComponentValid(const std::string &uri)
 
 void RFC2396Handler::addToComponentsList(DataTypes::Tree<DataTypes::Component> *outputCompTree, DataTypes::Component component)
 {
-    if(outputCompTree)
+    if(outputCompTree && !component.getValue().empty())
     {
         DataTypes::Tree<DataTypes::Component> componentNode;
         componentNode.setValue(component);

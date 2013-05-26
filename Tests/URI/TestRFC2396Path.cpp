@@ -37,4 +37,17 @@ void TestRFC2396Path::pathMatch()
     delete tree;
 }
 
+void TestRFC2396Path::pathDoNotMatch()
+{
+    URI::RFC2396Path handler;
+
+    DataTypes::Tree<DataTypes::Component>* tree = new DataTypes::Tree<DataTypes::Component>();
+
+    handler.parse("?sdfs=3", tree);
+
+    QVERIFY_THROW(tree->getChild(0), std::out_of_range);
+
+    delete tree;
+}
+
 }

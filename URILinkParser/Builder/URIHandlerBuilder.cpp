@@ -28,7 +28,7 @@ boost::shared_ptr<URI::URIHandler> URIHandlerBuilder::buildChainOfResponsibility
             boost::shared_ptr<URI::URIHandler>(new URI::RFC2396Schema);
 
     schema->setNext(boost::shared_ptr<URI::URIHandler>(new URI::RFC2396Authority(userInfo)));
-    schema->setNext(boost::shared_ptr<URI::URIHandler>(new URI::RFC2396Path(userInfo)));
+    schema->setNext(boost::shared_ptr<URI::URIHandler>(new URI::RFC2396Path()));
     schema->setNext(boost::shared_ptr<URI::URIHandler>(new URI::RFC2396Query));
     schema->setNext(boost::shared_ptr<URI::URIHandler>(new URI::RFC2396Fragment));
 

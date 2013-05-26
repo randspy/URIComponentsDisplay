@@ -54,44 +54,6 @@ void TestRFC2396URIStandardParser::allComponentsPresent()
     delete tree;
 }
 
-void TestRFC2396URIStandardParser::subComponentsInPath()
-{
-    boost::shared_ptr<URI::URIHandler> component = createAllComponents();
-
-    DataTypes::Tree<DataTypes::Component>* tree = new DataTypes::Tree<DataTypes::Component>();
-
-    component->parse("foo:fred@example.com?al", tree);
-
-    QCOMPARE(tree->getChild(1).getTagName().c_str(), "path");
-    QCOMPARE(tree->getChild(1).getValue().getValue().c_str(), "fred@example.com");
-
-    DataTypes::Tree<DataTypes::Component>& child = tree->getChild(1);
-    QCOMPARE(child.getChild(0).getTagName().c_str(), "user information");
-    QCOMPARE(child.getChild(0).getValue().getValue().c_str(), "fred");
-
-    QCOMPARE(child.getChild(1).getTagName().c_str(), "host");
-    QCOMPARE(child.getChild(1).getValue().getValue().c_str(), "example.com");
-
-    QVERIFY_THROW(child.getChild(2), std::out_of_range);
-
-    delete tree;
-}
-
-void TestRFC2396URIStandardParser::subComponentsCantShowUpTwice()
-{
-    boost::shared_ptr<URI::URIHandler> component = createAllComponents();
-
-    DataTypes::Tree<DataTypes::Component>* tree = new DataTypes::Tree<DataTypes::Component>();
-
-    component->parse("foo://fred@example.com/john@example.com?al", tree);
-
-    DataTypes::Tree<DataTypes::Component>& path = tree->getChild(2);
-
-    QVERIFY_THROW(path.getChild(0), std::out_of_range);
-
-    delete tree;
-}
-
 boost::shared_ptr<URI::URIHandler> TestRFC2396URIStandardParser::createAllComponents()
 {
     boost::shared_ptr<URI::URIHandler> userInfo =
@@ -104,7 +66,7 @@ boost::shared_ptr<URI::URIHandler> TestRFC2396URIStandardParser::createAllCompon
             boost::shared_ptr<URI::URIHandler>(new URI::RFC2396Schema);
 
     schema->setNext(boost::shared_ptr<URI::URIHandler>(new URI::RFC2396Authority(userInfo)));
-    schema->setNext(boost::shared_ptr<URI::URIHandler>(new URI::RFC2396Path(userInfo)));
+    schema->setNext(boost::shared_ptr<URI::URIHandler>(new URI::RFC2396Path()));
     schema->setNext(boost::shared_ptr<URI::URIHandler>(new URI::RFC2396Query));
     schema->setNext(boost::shared_ptr<URI::URIHandler>(new URI::RFC2396Fragment));
 

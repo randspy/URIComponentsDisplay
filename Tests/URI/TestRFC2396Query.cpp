@@ -29,4 +29,17 @@ void TestRFC2396Query::queryMatch()
     delete tree;
 }
 
+void TestRFC2396Query::queryDoNotMatch()
+{
+    URI::RFC2396Query handler;
+
+    DataTypes::Tree<DataTypes::Component>* tree = new DataTypes::Tree<DataTypes::Component>();
+
+    handler.parse("#sdf?asd", tree);
+
+    QVERIFY_THROW(tree->getChild(0), std::out_of_range);
+
+    delete tree;
+}
+
 }

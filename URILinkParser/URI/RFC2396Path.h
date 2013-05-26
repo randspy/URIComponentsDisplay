@@ -1,16 +1,15 @@
 #ifndef RFC2396PATH_H
 #define RFC2396PATH_H
 
-#include "RFC2396HandlerWithSubComponents.h"
+#include "RFC2396Handler.h"
 
 namespace URI
 {
 
-class RFC2396Path : public RFC2396HandlerWithSubComponents
+class RFC2396Path : public RFC2396Handler
 {
 public:
     RFC2396Path();
-    RFC2396Path(const boost::shared_ptr<URIHandler>& subHandlers);
     virtual ~RFC2396Path();
 };
 

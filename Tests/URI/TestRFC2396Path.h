@@ -15,6 +15,7 @@ public:
 
 private slots:
     void pathMatch();
+    void pathDoNotMatch();
 };
 
 DECLARE_TEST(TestRFC2396Path)

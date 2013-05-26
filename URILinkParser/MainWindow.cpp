@@ -15,6 +15,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->compTree->setHeaderHidden(true);
     connect(ui->breakURIIntoComponents, SIGNAL(released()), this, SLOT(breakURIIntoComponents()));
     connect(ui->URI, SIGNAL(returnPressed()), this, SLOT(breakURIIntoComponents()));
+
+    BL::URIHandlerBuilder builder;
+    _handler = builder.buildChainOfResponsibility();
 }
 
 MainWindow::~MainWindow()
@@ -24,19 +27,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::breakURIIntoComponents()
 {
-    ui->compTree->clear();
-
-    BL::URIHandlerBuilder builder;
-    boost::shared_ptr<URI::URIHandler> handler = builder.buildChainOfResponsibility();
     DataTypes::Tree<DataTypes::Component>components;
-
-    handler->parse(ui->URI->text().toStdString(), &components);
-
-
+    _handler->parse(ui->URI->text().toStdString(), &components);
     addComponentLevelToTreeWidget(components);
-
 }
-
 
 void MainWindow::addComponentLevelToTreeWidget(DataTypes::Tree<DataTypes::Component>& components)
 {
@@ -44,16 +38,14 @@ void MainWindow::addComponentLevelToTreeWidget(DataTypes::Tree<DataTypes::Compon
     unsigned int numberOfComponents = components.numberOfChilds();
     for (unsigned int idx = 0; idx < numberOfComponents; ++idx)
     {
-        QString tagName = components.getChild(idx).getTagName().c_str();
-        QString value = components.getChild(idx).getValue().getValue().c_str();
-        QTreeWidgetItem* item = new QTreeWidgetItem();
-        item->setText(0,  tagName + " : " + value);
+        QTreeWidgetItem* item = setTreeWidgetItem(components.getChild(idx));
         items.append(item);
-
         addSubComponents(item, components.getChild(idx));
     }
 
+    ui->compTree->clear();
     ui->compTree->insertTopLevelItems(0, items);
+    ui->compTree->expandAll();
 }
 
 void MainWindow::addSubComponents(QTreeWidgetItem* item, DataTypes::Tree<DataTypes::Component>& components)
@@ -62,12 +54,25 @@ void MainWindow::addSubComponents(QTreeWidgetItem* item, DataTypes::Tree<DataTyp
 
     for(unsigned int idx = 0; idx < numberOfComponents; ++idx)
     {
-        QString tagName = components.getChild(idx).getTagName().c_str();
-        QString value = components.getChild(idx).getValue().getValue().c_str();
-        QTreeWidgetItem* child = new QTreeWidgetItem();
-        child->setText(0,  tagName + " : " + value);
+        QTreeWidgetItem* child = setTreeWidgetItem(components.getChild(idx));
         item->addChild(child);
-
         addSubComponents(child, components.getChild(idx));
     }
 }
+
+QTreeWidgetItem * MainWindow::setTreeWidgetItem(DataTypes::Tree<DataTypes::Component>& component)
+{
+    QString tagName = component.getTagName().c_str();
+    QString value = component.getValue().getValue().c_str();
+
+    QTreeWidgetItem* item = new QTreeWidgetItem();
+    item->setText(0,  tagName + " : " + value);
+    item->setExpanded(true);
+    if(!component.getValue().isValid())
+    {
+        item->setTextColor(0,Qt::red);
+    }
+
+    return item;
+}
+

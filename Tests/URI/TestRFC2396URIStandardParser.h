@@ -19,8 +19,6 @@ public:
 private slots:
 
     void allComponentsPresent();
-    void subComponentsInPath();
-    void subComponentsCantShowUpTwice();
 
 private:
     boost::shared_ptr<URI::URIHandler> createAllComponents();

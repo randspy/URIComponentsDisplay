@@ -8,6 +8,8 @@
 
 #include "DataTypes/Component.h"
 #include "DataTypes/Tree.h"
+#include "URI/URIHandler.h"
+#include <boost/shared_ptr.hpp>
 
 namespace Ui {
 class MainWindow;
@@ -20,7 +22,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    
+
 public slots:
 
     void breakURIIntoComponents();
@@ -28,10 +30,12 @@ public slots:
 private:
     void addComponentLevelToTreeWidget(DataTypes::Tree<DataTypes::Component>& components);
     void addSubComponents(QTreeWidgetItem* item, DataTypes::Tree<DataTypes::Component>& components);
+    QTreeWidgetItem * setTreeWidgetItem(DataTypes::Tree<DataTypes::Component>& component);
 
 
 private:
     Ui::MainWindow *ui;
+    boost::shared_ptr<URI::URIHandler> _handler;
 };
 
 #endif // MAINWINDOW_H

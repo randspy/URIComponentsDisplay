@@ -25,4 +25,20 @@ void TestRFC2396Port::portMatch()
     delete tree;
 }
 
+void TestRFC2396Port::portIsInvalid()
+{
+    URI::RFC2396Port handler;
+
+    DataTypes::Tree<DataTypes::Component>* tree = new DataTypes::Tree<DataTypes::Component>();
+
+    handler.parse(":80c08", tree);
+    DataTypes::Component component = tree->getChild(0).getValue();
+
+    QCOMPARE(tree->getChild(0).getTagName().c_str(), "port");
+    QCOMPARE(component.getValue().c_str(), "80c08");
+    QCOMPARE(component.isValid(), false);
+
+    delete tree;
+}
+
 }

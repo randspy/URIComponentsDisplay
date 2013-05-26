@@ -31,4 +31,21 @@ void TestRFC2396Host::hostMatch()
     delete tree;
 }
 
+void TestRFC2396Host::hostWithSquareBrackets()
+{
+    URI::RFC2396Host handler;
+
+    DataTypes::Tree<DataTypes::Component>* tree = new DataTypes::Tree<DataTypes::Component>();
+
+    handler.parse("[2001:db8::7]/c=GB", tree);
+    DataTypes::Component component = tree->getChild(0).getValue();
+
+    QCOMPARE(tree->getChild(0).getTagName().c_str(), "host");
+    QCOMPARE(component.getValue().c_str(), "[2001:db8::7]");
+    QCOMPARE(component.isValid(), true);
+
+
+    delete tree;
+}
+
 }

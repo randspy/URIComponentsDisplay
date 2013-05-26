@@ -15,6 +15,7 @@ public:
 
 private slots:
     void queryMatch();
+    void queryDoNotMatch();
 };
 
 DECLARE_TEST(TestRFC2396Query)

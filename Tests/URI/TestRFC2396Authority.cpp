@@ -47,6 +47,9 @@ void TestRFC2396Authority::authorityDoNotMatch()
 
     QVERIFY_THROW(tree->getChild(0), std::out_of_range);
 
+    handler.parse("sdf//dsfsd@sf/sdfsd", tree);
+     QVERIFY_THROW(tree->getChild(0), std::out_of_range);
+
     delete tree;
 }
 
